@@ -4,8 +4,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {setSearchWord, setWord} from "@/app/redux/slice/getProductsSlice";
 import debounce from 'lodash.debounce';
 
-function SearchInput({searchWord,dispatch}) {
-    const [theme, setTheme] = useState('light');
+function SearchInput({searchWord,dispatch,theme}) {
 
     const debouncedDispatch = useCallback(
         debounce((value) => {
@@ -13,11 +12,6 @@ function SearchInput({searchWord,dispatch}) {
         }, 500),
         [dispatch]
     );
-
-    useEffect(() => {
-        const storedTheme = localStorage.getItem('theme') || 'light';
-        setTheme(storedTheme);
-    }, [theme]);
 
     const handleChange = (event) => {
         dispatch(setWord(event.target.value));

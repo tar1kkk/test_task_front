@@ -9,7 +9,9 @@ const initialState = {
     currentPage: 1,
     itemsPerPage: 10,
     totalPages: 0,
+    theme: typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light',
 };
+
 
 export const getData = createAsyncThunk('product/getData', async () => {
     try {
@@ -50,6 +52,9 @@ const getProductsSlice = createSlice({
         },
         setChangeTheme(state, action) {
             state.theme = action.payload;
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('theme', action.payload);
+            }
         }
     },
     extraReducers: (builder) => {
@@ -73,11 +78,11 @@ const getProductsSlice = createSlice({
 
 export const {
     removeProduct,
+    setChangeTheme,
     setCurrentPage,
     setItemsPerPage,
     setWord,
     setSearchWord,
     setTotalPage,
-    setChangeTheme
 } = getProductsSlice.actions;
 export default getProductsSlice.reducer;

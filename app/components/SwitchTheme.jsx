@@ -1,30 +1,30 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, {useEffect} from 'react';
+import { setChangeTheme } from "@/app/redux/slice/getProductsSlice";
 
 const themes = {
     light: 'bg-white text-black',
     dark: 'bg-gray-900 text-white',
 };
 
-function SwitchTheme() {
-    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+function SwitchTheme({dispatch,theme}) {
 
     useEffect(() => {
         document.body.className = themes[theme];
-        localStorage.setItem('theme', theme);
     }, [theme]);
 
     const toggleTheme = () => {
-        setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        dispatch(setChangeTheme(newTheme));
     };
 
     return (
         <div>
             <label className="flex items-center cursor-pointer">
-        <span className="text-sm font-medium mr-2">
-          {theme === 'light' ? '🌞 Light' : '🌙 Dark'}
-        </span>
+                <span className="text-sm font-medium mr-2">
+                    {theme === 'light' ? '🌞 Light' : '🌙 Dark'}
+                </span>
                 <div className="relative">
                     <input
                         type="checkbox"
