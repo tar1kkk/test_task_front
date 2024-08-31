@@ -1,5 +1,5 @@
 'use client';
-import React  from 'react';
+import React from 'react';
 import Search from "@/app/components/Search";
 import SwitchTheme from "@/app/components/SwitchTheme";
 import SelectMenu from "@/app/components/SelectMenu";
@@ -15,7 +15,15 @@ function Home() {
     const {status} = useProducts();
     const {currentProducts} = usePagnation();
     const dispatch = useDispatch();
-    const {currentPage,itemsPerPage,searchWord,totalPages,theme } = useSelector(state => state.getProductsSlice);
+    const {
+        currentPage,
+        itemsPerPage,
+        searchWord,
+        totalPages,
+        theme,
+        sortOrder,
+        sortBy
+    } = useSelector(state => state.getProductsSlice);
 
     if (status !== 'success') {
         return <Loader/>
@@ -27,7 +35,8 @@ function Home() {
                 <Search searchWord={searchWord} dispatch={dispatch} theme={theme}/>
                 <SwitchTheme theme={theme} dispatch={dispatch}/>
             </div>
-            <ProductsTable filteredProducts={currentProducts}  dispatch={dispatch} theme={theme} />
+            <ProductsTable filteredProducts={currentProducts} dispatch={dispatch} theme={theme} sortOrder={sortOrder}
+                           sortBy={sortBy}/>
             <Pagination currentPage={currentPage} dispatch={dispatch} totalPages={totalPages}/>
         </div>
     );

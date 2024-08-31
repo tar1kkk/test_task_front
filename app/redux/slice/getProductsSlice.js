@@ -10,6 +10,8 @@ const initialState = {
     itemsPerPage: 10,
     totalPages: 0,
     theme: typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light',
+    orderMultiplier : 'asc',
+    sortBy : ''
 };
 
 
@@ -55,6 +57,21 @@ const getProductsSlice = createSlice({
             if (typeof window !== 'undefined') {
                 localStorage.setItem('theme', action.payload);
             }
+        },
+        setSortOnRow: (state, action) => {
+            const key = action.payload;
+            const orderMultiplier = state.sortOrder === 'asc' ? 1 : -1;
+
+            state.filteredProducts = state.filteredProducts.sort((a, b) => {
+                if (typeof a[key] === 'number' && typeof b[key] === 'number') {
+                    return (a[key] - b[key]) * orderMultiplier;
+                } else {
+                    return a[key].localeCompare(b[key]) * orderMultiplier;
+                }
+            });
+
+            state.sortOrder = state.sortOrder === 'asc' ? 'desc' : 'asc';
+            state.sortBy = key;
         }
     },
     extraReducers: (builder) => {
@@ -84,5 +101,6 @@ export const {
     setWord,
     setSearchWord,
     setTotalPage,
+    setSortOnRow,
 } = getProductsSlice.actions;
 export default getProductsSlice.reducer;
