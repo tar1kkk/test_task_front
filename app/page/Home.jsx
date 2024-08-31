@@ -1,5 +1,5 @@
 'use client';
-import React,  from 'react';
+import React  from 'react';
 import Search from "@/app/components/Search";
 import SwitchTheme from "@/app/components/SwitchTheme";
 import SelectMenu from "@/app/components/SelectMenu";

@@ -17,6 +17,7 @@ export const usePagnation = () => {
     useEffect(() => {
         const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
         dispatch(setTotalPage(totalPages));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filteredProducts]);
 
     return {currentProducts};

@@ -3,6 +3,7 @@ import {FaRegTrashAlt} from "react-icons/fa";
 import {removeProduct} from "@/app/redux/slice/getProductsSlice";
 import {useDispatch} from "react-redux";
 import StatusBadge from "@/app/components/StatusColor";
+import Image from "next/image";
 
 function ProductsTable({filteredProducts, dispatch,theme}) {
 
@@ -31,7 +32,9 @@ function ProductsTable({filteredProducts, dispatch,theme}) {
                     <tr key={item["Tracking ID"]} className={`border-b ${rowClassName}`}>
                         <td className="px-4 py-2 text-sm">#{item["Tracking ID"]}</td>
                         <td className="px-4 py-2 text-sm flex items-center">
-                            <img
+                            <Image
+                                height={40}
+                                width={40}
                                 src={item["Product Image"]}
                                 alt={item["Product Name"]}
                                 className="w-10 h-10 object-cover rounded"
@@ -46,7 +49,7 @@ function ProductsTable({filteredProducts, dispatch,theme}) {
                         <td className="px-4 py-2 text-sm">
                             <FaRegTrashAlt
                                 onClick={() => dispatch(removeProduct(item))}
-                                className="cursor-pointer text-red-500"
+                                className="cursor-pointer text-red-500 h-4 w-4"
                             />
                         </td>
                     </tr>

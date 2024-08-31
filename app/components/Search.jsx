@@ -6,13 +6,15 @@ import debounce from 'lodash.debounce';
 
 function SearchInput({searchWord,dispatch,theme}) {
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedDispatch = useCallback(
         debounce((value) => {
             dispatch(setSearchWord(value));
         }, 500),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [dispatch]
     );
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const handleChange = (event) => {
         dispatch(setWord(event.target.value));
         debouncedDispatch(event.target.value);
