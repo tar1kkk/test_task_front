@@ -14,10 +14,13 @@ const initialState = {
     sortBy : ''
 };
 
+const apiUrl = process.env.NODE_ENV === 'production'
+    ? 'https://your-production-api-url.com/api/data'
+    : 'http://localhost:3000/api/data';
 
 export const getData = createAsyncThunk('product/getData', async () => {
     try {
-        const response = await axios.get('http://localhost:3000/api/data');
+        const response = await axios.get(apiUrl);
         return response.data.posts;
     } catch (error) {
         throw error;
