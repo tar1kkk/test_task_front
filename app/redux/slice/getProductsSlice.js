@@ -15,7 +15,7 @@ const initialState = {
 };
 
 const apiUrl = process.env.NODE_ENV === 'production'
-    ? 'https://your-production-api-url.com/api/data'
+    ? 'https://test-task-front-sigma.vercel.app/api/data'
     : 'http://localhost:3000/api/data';
 
 export const getData = createAsyncThunk('product/getData', async () => {
